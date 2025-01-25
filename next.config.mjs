@@ -5,7 +5,7 @@
  * 개발모드로 실행했을 때 컴포넌트를 2번 실행하게 된다.
  */
 const nextConfig = {
-  reactStrictMode: false, 
+  reactStrictMode: false,
 };
 
 export default nextConfig;
