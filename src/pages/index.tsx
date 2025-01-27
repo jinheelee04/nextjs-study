@@ -1,4 +1,6 @@
+import SearchableLayout from "@/components/searchable-layout";
 import style from "./index.module.css";
+import { ReactNode } from "react";
 
 /**
  * module css 를 사용하면 자동으로 유니크한 클래스네임을 만들어준다.
@@ -14,3 +16,7 @@ export default function Home() {
     </>
   );
 }
+
+Home.getLayout = (page: ReactNode) => {
+  return <SearchableLayout>{page}</SearchableLayout>;
+};
