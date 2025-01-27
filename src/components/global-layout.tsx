@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import Link from "next/link";
-import style from "../styles/global-layout.module.css";
+import style from "./global-layout.module.css";
 export default function GlobalLayout({ children }: { children: ReactNode }) {
   return (
     <div className={style.container}>
