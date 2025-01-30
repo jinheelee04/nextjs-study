@@ -60,7 +60,7 @@ InferGetStaticPropsType<typeof getStaticProps>) {
             content="한입 북스에 등록된 도서들을 만들어보세요."
           />
         </Head>
-        <div>"로딩중입니다."</div>
+        <div>로딩중입니다.</div>
       </>
     );
   }
