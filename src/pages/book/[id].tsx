@@ -2,6 +2,7 @@ import fetchOneBook from "@/lib/fetch-one-book";
 import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import Image from "next/image";
 import style from "./[id].module.css";
+import { useRouter } from "next/router";
 // const mockData = {
 //   id: 1,
 //   title: "한 입 크기로 잘라 먹는 리액트",
@@ -21,7 +22,9 @@ export const getStaticPaths = () => {
       { params: { id: "2" } },
       { params: { id: "3" } },
     ],
-    fallback: false, // 대비책, false: path에 설정되지 않은 값이 넘어왔을 경우 not found 페이지가 렌더링된다.
+    // fallback: false, // 대비책, false: path에 설정되지 않은 값이 넘어왔을 경우 not found 페이지가 렌더링된다.
+    // fallback: "blocking", // blocking: 존재하지 않는 경로인 경우 실시간으로 사전 렌더링한다.(Like SSR) 페이지 즉시 생성되어 빌드 폴더에 페이지 생성된다.
+    fallback: true, // true: 백엔드에서 불러오는 데이터를 무시하고 컴포넌트가 렌더링하는 레이아웃 정도만 렌더링해주기 위해서 props가 없는 폴백상태의 페이지만 바로 반환한다. 추후에 props를 계산하여 따로 반환한다.
   };
 };
 
@@ -29,7 +32,11 @@ export const getStaticPaths = () => {
 export const getStaticProps = async (context: GetStaticPropsContext) => {
   const id = context.params!.id;
   const book = await fetchOneBook(Number(id));
-
+  if (!book) {
+    return {
+      notFound: true,
+    };
+  }
   return {
     props: { book },
   };
@@ -39,6 +46,8 @@ export default function Page({
   book,
 }: // }: InferGetServerSidePropsType<typeof getServerSideProps>) {
 InferGetStaticPropsType<typeof getStaticProps>) {
+  const router = useRouter();
+  if (router.isFallback) return "로딩중입니다.";
   if (!book) return "문제가 발생했습니다. 다시 시도하세요";
   const { id, title, subTitle, description, author, publisher, coverImgUrl } =
     book;
