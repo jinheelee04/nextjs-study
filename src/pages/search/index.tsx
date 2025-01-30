@@ -5,7 +5,7 @@ import fetchBooks from "@/lib/fetch-books";
 import { useRouter } from "next/router";
 import { ReactNode, useEffect, useState } from "react";
 import { BookData } from "../../../types";
-
+import Head from "next/head";
 /**
  * context에는 현재 브라우저로 부터 받은 요청에 대한 모든 정보가 포함되어 있다.
  * @param context
@@ -37,6 +37,15 @@ export default function Page() {
   }, [q]);
   return (
     <div>
+      <Head>
+        <title>한입북스 - 검색결과</title>
+        <meta property="og:image" content="/thumbnail.png" />
+        <meta property="og:title" content="한입북스 - 검색결과" />
+        <meta
+          property="og:description"
+          content="한입 북스에 등록된 도서들을 만들어보세요."
+        />
+      </Head>
       {books.map((book) => (
         <BookItem key={book.id} {...book} />
       ))}
