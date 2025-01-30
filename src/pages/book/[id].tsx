@@ -60,7 +60,7 @@ InferGetStaticPropsType<typeof getStaticProps>) {
         {/* <img src={coverImgUrl} /> */}
         <Image
           src={coverImgUrl}
-          alt={title} // 접근성을 위한 alt 속성 추가
+          alt={title + id} // 접근성을 위한 alt 속성 추가
           width={300} // 원하는 너비
           height={350} // 원하는 높이
           // fill // 부모 요소 크기에 맞춤
