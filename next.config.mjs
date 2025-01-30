@@ -6,6 +6,9 @@
  */
 const nextConfig = {
   reactStrictMode: false,
+  images: {
+    domains: ["shopping-phinf.pstatic.net"], // 외부 이미지 허용
+  },
 };
 
 export default nextConfig;
